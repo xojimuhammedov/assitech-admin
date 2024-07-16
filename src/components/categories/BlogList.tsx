@@ -1,4 +1,4 @@
-"use client"; 
+"use client";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import updateIcon from "../../../public/assets/img/icon/action-2.png";
@@ -13,7 +13,7 @@ import NiceSelectThree from "@/utils/NiceSelectThree";
 import apiUrl from "@/utils/api";
 
 export interface DataType {
-  id:string
+  id: string;
   name_uz: string;
   name_en: string;
   name_ru: string;
@@ -36,12 +36,9 @@ const BlogList = () => {
 
   const handleDeleteProduct = (id: string) => {
     axios
-      .delete(
-        `${apiUrl}/categories/${id}`,
-        header
-      )
+      .delete(`${apiUrl}/categories/${id}`, header)
       .then((res) => {
-        console.log(res)
+        console.log(res);
         if (res.data.success) {
           const remainingBlogs = blogs.filter((item) => item.id !== id);
           setBlogs(remainingBlogs);
@@ -67,7 +64,9 @@ const BlogList = () => {
   const handleInputChange = (e: any) => {
     setSearchValue(e.target.value);
     axios
-      .get(`${process.env.BASE_URL}/service/search-service?search=${searchValue}`)
+      .get(
+        `${process.env.BASE_URL}/service/search-service?search=${searchValue}`
+      )
       .then((res) => {
         setBlogs(res.data);
       })
@@ -77,7 +76,7 @@ const BlogList = () => {
   useEffect(() => {
     axios
       .get(`${apiUrl}/categories/`)
-      .then((res) => { 
+      .then((res) => {
         setBlogs(res.data.data);
         setotalPages(res.data.totalPages);
         setcurrentPage(res.data.currentPage);
@@ -125,7 +124,6 @@ const BlogList = () => {
                   </span>
                 </div>
               </div>
-              
             </div>
           </div>
 
@@ -135,33 +133,28 @@ const BlogList = () => {
                 <div className="cashier-salereturns-table-innerD">
                   <div className="cashier-salereturns-table-inner-wrapperD border border-solid border-grayBorder border-b-0 mb-7">
                     <div className="cashier-salereturns-table-list flex border-b border-solid border-grayBorder h-12">
-                   
                       <div className="cashier-salereturns-table-dateF  ml-5">
-                        <h5>Hudud nomi</h5>
-                      </div>  
+                        <h5>Название категории</h5>
+                      </div>
 
                       <div className="cashier-salereturns-table-actionF">
-                        <h5>Action</h5>
+                        <h5>Действие</h5>
                       </div>
                     </div>
 
                     {blogs.map((item) => (
                       <div
                         key={item.id}
-                        className="cashier-salereturns-table-list flex border-b border-solid border-grayBorder h-12"
-                      >
-                       
+                        className="cashier-salereturns-table-list flex border-b border-solid border-grayBorder h-12">
                         <div className="cashier-salereturns-table-dateF ml-5">
-                          <span className="capitalize"> {item.name_uz} </span>
-                        </div> 
-                        
+                          <span className="capitalize"> {item.name_ru} </span>
+                        </div>
 
                         <div className="cashier-salereturns-table-actionF">
                           <div className="dropdown">
                             <button
                               onClick={() => handleOpen(item.id)}
-                              className="common-action-menu-style"
-                            >
+                              className="common-action-menu-style">
                               Action
                               <i className="fa-sharp fa-solid fa-caret-down"></i>
                             </button>
@@ -171,19 +164,18 @@ const BlogList = () => {
                                 display: `${
                                   item.id === match && open ? "block" : "none"
                                 }`,
-                              }}
-                            >
+                              }}>
                               <button className="dropdown-menu-item">
                                 <Image src={updateIcon} alt="icon not found" />
 
-                                <Link href={`categories/categories-update/${item.id}`}>
-                                Edit
+                                <Link
+                                  href={`categories/categories-update/${item.id}`}>
+                                  Edit
                                 </Link>
                               </button>
                               <button
                                 onClick={() => handleDeleteProduct(item.id)}
-                                className="dropdown-menu-item"
-                              >
+                                className="dropdown-menu-item">
                                 <Image src={deleteIcon} alt="icon not found" />
                                 <span>Delete</span>
                               </button>
@@ -222,7 +214,7 @@ const BlogList = () => {
             </>
           ) : (
             <>
-               <ChartPreloader/>
+              <ChartPreloader />
             </>
           )}
         </div>

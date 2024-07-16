@@ -137,15 +137,13 @@ const ProductsList = () => {
                     <div className="cashier-salereturns-table-list flex border-b border-solid border-grayBorder h-12">
                     
                       <div className="cashier-salereturns-table-dateF max-w-fit	 ml-5">
-                        <h5>Title - Uz</h5>
+                        <h5>Наименование товара</h5>
                       </div> 
-                      {/* <div className="cashier-salereturns-table-companyF ml-5">
-                        <h5>Text - Uz</h5>
-                      </div> */}
+                     
                       
 
                       <div className="cashier-salereturns-table-actionF">
-                        <h5>Action</h5>
+                        <h5>Действие</h5>
                       </div>
                     </div>
 
@@ -157,7 +155,7 @@ const ProductsList = () => {
                         >
                         
                           <div className="cashier-salereturns-table-dateF ml-5">
-                            <span> {item.title_uz} </span>
+                            <span> {item.title_ru} </span>
                           </div> 
                           {/* <div className="cashier-salereturns-table-customerF ">
                             <span>{item.text_uz}</span>
