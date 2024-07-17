@@ -327,7 +327,7 @@ const BlogProductMain = ({id}:any) => {
                       </option>
                     {
                         blogs.map((item:any, index:any) => (
-                            <option key={index} value={item.id}>{item.name_uz}</option>
+                            <option key={index} value={item.id}>{item.name_ru}</option>
                         ))
                     }
                 </select>           
