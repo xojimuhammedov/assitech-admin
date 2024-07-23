@@ -52,13 +52,6 @@ const Header = ({ breadCampTitle }: breadCampTitleType) => {
     setCollapse(false);
   };
 
-
-  // useEffect(() => {
-  //   axios.get(`${process.env.BASE_URL}/user-input/contact-info`)
-  //   .then(res =>{
-  //     setNotificationData(res.data)
-  //   })
-  // }, [])
   
 
   return (

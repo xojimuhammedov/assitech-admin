@@ -17,17 +17,10 @@ const Sidebar = () => {
   };
   return (
     <>
-      <div
-        className={`${
-          sideMenuOpen
-            ? "cashier-dashboard-sidebar sidebar-enable"
-            : "cashier-dashboard-sidebar"
-        }`}
-      >
+      <div className={`cashier-dashboard-sidebar sidebar-enable`}>
         <div
           className=" cashier-menu-wrapper bg-white border-r border-b border-solid border-grayBorder py-6 px-7 maxLg:px-5
-        maxLg:py-6"
-        >
+        maxLg:py-6">
           <div>
             <div className="cashier-header-profile relative pl-5 flex flex-wrap items-center maxMd:pr-0 mb-7">
               <div className="cashier-header-profile-img w-12 maxSm:mr-0 md:mr-0 cursor-pointer og-profile-icon">
@@ -46,8 +39,7 @@ const Sidebar = () => {
                 <div>
                   <Link
                     className="text-[15px] font-bold text-heading cursor-pointer"
-                    href=""
-                  >
+                    href="">
                     {user?.first_name}
                     <span className="text-[10px] font-bold leading-none pt-0.5 pb-[1px] px-1 border border-solid border-[#FFC403] text-[#FFC403] inline-block ml-2 uppercase rounded-[3px]">
                       Pro
@@ -55,7 +47,7 @@ const Sidebar = () => {
                   </Link>
                 </div>
                 <span className="text-[13px] font-normal text-bodyText cursor-pointer">
-                   Admin
+                  Admin
                 </span>
               </div>
             </div>
@@ -72,13 +64,11 @@ const Sidebar = () => {
                               : "main-menu"
                           } `
                         : ""
-                    }
-                  >
+                    }>
                     <Link
                       onClick={() => handleClick(item.id)}
                       href={item.link || ""}
-                      className={item.submenu?.length ? "has-arrow" : ""}
-                    >
+                      className={item.submenu?.length ? "has-arrow" : ""}>
                       {item.icon && <item.icon />}
 
                       {item.text}
@@ -116,8 +106,7 @@ const Sidebar = () => {
             sideMenuOpen
               ? "cashier-menu-overlay cashier-menu-overlay-dashboard  sidebar-enable"
               : "cashier-menu-overlay cashier-menu-overlay-dashboard"
-          }`}
-        ></div>
+          }`}></div>
       </div>
     </>
   );

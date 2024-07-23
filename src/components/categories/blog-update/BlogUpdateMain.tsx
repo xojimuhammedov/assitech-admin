@@ -84,7 +84,7 @@ const BlogUpdateMain = ({ id }: idType) => {
       {myproduct && (
         <form
           onSubmit={handleSubmit(onSubmit)}
-          className="cashier-content-area mt-[30px] px-7"
+          className="cashier-content-area ml-[300px] mt-[30px] px-7"
         >
           <div className="cashier-addsupplier-area bg-white p-7 custom-shadow rounded-lg pt-5 mb-5">
             <h4 className="text-[20px] font-bold text-heading mb-9">

@@ -15,7 +15,6 @@ const ContentWrapper = ({ children,breadCampTitle }: childrenAndBreadCampType) =
               <BreadCamp breadCampTitle={breadCampTitle}/>
               {children}
               <Footer/>
-              
             </div>
         </>
     );

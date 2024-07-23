@@ -9,9 +9,6 @@ import RefundIcon from "@/svg/RefundIcon";
 import PdfIcon from "@/svg/PdfIcon";
 import OrderIcon from "@/svg/OrderSvg";
 
-
-
-
 interface MenuItem {
   id: number;
   text: string;
@@ -44,24 +41,56 @@ export const menuData: MenuItem[] = [
   //     {
   //       text: "Mehmonxona qo'sish",
   //       link: "/create-service",
-  //     }, 
-  //   ],
-  // },
-  // {
-  //   id: 3,
-  //   text: "Bloglar",
-  //   icon: BlogIcon,
-  //   submenu: [
-  //     {
-  //       text: "Bloglar",
-  //       link: "/blogs",
-  //     },
-  //     {
-  //       text: "Bloglar yaratish",
-  //       link: "/create-blog",
   //     },
   //   ],
   // },
+
+  {
+    id: 7,
+    text: "Категория в соответствии с",
+    icon: BlogIcon,
+    submenu: [
+      {
+        text: "Все категории",
+        link: "/categories",
+      },
+      {
+        text: "Создать категорию",
+        link: "/create-categories",
+      },
+    ],
+  },
+
+  {
+    id: 8,
+    text: "Продукт",
+    icon: BlogIcon,
+    submenu: [
+      {
+        text: "Все Продукт",
+        link: "/products",
+      },
+      {
+        text: "Создать Продукт",
+        link: "/create-products",
+      },
+    ],
+  },
+  {
+    id: 3,
+    text: "Курсы",
+    icon: BlogIcon,
+    submenu: [
+      {
+        text: "Курсы",
+        link: "/services",
+      },
+      {
+        text: "Курсы Создавать",
+        link: "/create-service",
+      },
+    ],
+  },
   // {
   //   id: 4,
   //   text: "Yangiliklar",
@@ -77,8 +106,6 @@ export const menuData: MenuItem[] = [
   //     },
   //   ],
   // },
- 
-
 
   // {
   //   id: 5,
@@ -111,39 +138,4 @@ export const menuData: MenuItem[] = [
   //     },
   //   ],
   // },
-
-
-  {
-    id: 7,
-    text: "Категория в соответствии с",
-    icon: BlogIcon,
-    submenu: [
-      {
-        text: "Все категории",
-        link: "/categories",
-      },
-      {
-        text: "Создать категорию",
-        link: "/create-categories",
-      },
-    ],
-  },
-  
-  {
-    id: 8,
-    text: "Продукт",
-    icon: BlogIcon,
-    submenu: [
-      {
-        text: "Все Продукт",
-        link: "/products",
-      },
-      {
-        text: "Создать Продукт",
-        link: "/create-products",
-      },
-    ],
-  },
- 
-  
 ];

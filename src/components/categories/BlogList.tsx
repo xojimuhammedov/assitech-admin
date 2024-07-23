@@ -107,7 +107,7 @@ const BlogList = () => {
   const selectHandler = () => {};
   return (
     <>
-      <div className="cashier-content-area mt-[30px] px-7">
+      <div className="cashier-content-area ml-[300px] mt-[30px] px-7">
         <div className="cashier-salereturns-area bg-white p-7 custom-shadow rounded-lg pt-5 mb-5">
           <div className="cashier-table-header-search-area">
             <div className="grid grid-cols-12 gap-x-5 mb-7 pb-0.5">

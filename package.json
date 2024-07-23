@@ -27,6 +27,8 @@
     "apexcharts": "^3.41.0",
     "autoprefixer": "^10.4.14",
     "axios": "^1.4.0",
+    "ckeditor5": "^42.0.1",
+    "ckeditor5-premium-features": "^42.0.1",
     "draft-js": "^0.11.7",
     "eslint": "8.43.0",
     "eslint-config-next": "13.4.6",
