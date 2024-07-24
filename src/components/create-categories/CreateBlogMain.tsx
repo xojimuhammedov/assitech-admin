@@ -98,7 +98,7 @@ const CreateServiceMain = () => {
       >
         <div className="cashier-addsupplier-area bg-white p-7 custom-shadow rounded-lg pt-5 mb-5">
           <h4 className="text-[20px] font-bold text-heading mb-9">
-            Hudud yaratish
+          Создать категорию
           </h4>
           <div className="grid grid-cols-12 gap-x-5"> 
           <div className="lg:col-span-4 md:col-span-6 col-span-12">
@@ -173,7 +173,7 @@ const CreateServiceMain = () => {
             <div className="col-span-12">
               <div className="cashier-managesale-top-btn default-light-theme pt-2.5">
                 <button className="btn-primary" type="submit">
-                  Yaratish
+                Создавать
                 </button>
               </div>
             </div>
