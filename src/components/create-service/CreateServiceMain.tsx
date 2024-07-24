@@ -116,7 +116,7 @@ const CreateServiceMain = () => {
       >
         <div className="cashier-addsupplier-area bg-white p-7 custom-shadow rounded-lg pt-5 mb-5">
           <h4 className="text-[20px] font-bold text-heading mb-9">
-            Hotel yaratish
+          Создать курс
           </h4>
           <div className="grid grid-cols-12 gap-x-5">
             <div className="lg:col-span-4 md:col-span-6 col-span-12">
@@ -248,7 +248,7 @@ const CreateServiceMain = () => {
               <div className="cashier-select-field mb-5">
                 <h5 className="text-[15px] text-heading font-semibold mb-3">
                   {" "}
-                  Hotelning rasmlarini yuklang
+                  Скачать видео курса
                 </h5>
                 <div className="cashier-input-field-style">
                   <div className="single-input-field w-full">
@@ -268,7 +268,7 @@ const CreateServiceMain = () => {
             <div className="col-span-12">
               <div className="cashier-managesale-top-btn default-light-theme pt-2.5">
                 <button className="btn-primary" type="submit">
-                  Yaratish
+                Создавать
                 </button>
               </div>
             </div>

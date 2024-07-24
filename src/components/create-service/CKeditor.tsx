@@ -2,19 +2,12 @@ import React, { useEffect, useRef } from "react";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 
-interface CKeditorProps {
-  onChange: (data: string) => void;
-  editorLoaded: boolean;
-  name: string;
-  value: string;
-}
-
 export default function CKeditor({
   onChange,
   editorLoaded,
   name,
   value,
-}: CKeditorProps) {
+}: any) {
   const editorRef = useRef<{ CKEditor: typeof CKEditor; ClassicEditor: typeof ClassicEditor }>();
   useEffect(() => {
     editorRef.current = {
