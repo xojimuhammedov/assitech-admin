@@ -151,7 +151,7 @@ const ProductsList = () => {
                       products.map((item) => (
                         <div
                           key={item.id}
-                          className="cashier-salereturns-table-list flex border-b border-solid border-grayBorder h-12"
+                          className="cashier-salereturns-table-list flex border-b border-solid border-grayBorder h-20"
                         >
                         
                           <div className="cashier-salereturns-table-dateF ml-5">
