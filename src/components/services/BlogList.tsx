@@ -51,7 +51,7 @@ const BlogList = () => {
         if (res.data.success) {
           const remainingBlogs = blogs.filter((item) => item.id !== id);
           setBlogs(remainingBlogs);
-          toast.success(`Hotel o'chirildi`, {
+          toast.success(`Kurs o'chirildi`, {
             position: "top-left",
           });
         }
@@ -143,13 +143,9 @@ const BlogList = () => {
                     <div className="cashier-salereturns-table-list flex border-b border-solid border-grayBorder h-12">
                    
                       <div className="cashier-salereturns-table-dateF  ml-5">
-                        <h5>Hotel nomi</h5>
+                        <h5>Kurs nomi</h5>
                       </div>  
 
-                      <div className="cashier-salereturns-table-dateF  ml-5">
-                        <h5>Hotel addresi</h5>
-                      </div> 
-                      
 
                       <div className="cashier-salereturns-table-actionF">
                         <h5>Action</h5>
@@ -159,18 +155,13 @@ const BlogList = () => {
                     {blogs.map((item) => (
                       <div
                         key={item.id}
-                        className="cashier-salereturns-table-list flex border-b border-solid border-grayBorder h-12"
+                        className="cashier-salereturns-table-list flex border-b border-solid border-grayBorder h-20"
                       >
                        
                         <div className="cashier-salereturns-table-dateF ml-5">
                           <span className="capitalize"> {item.name_uz} </span>
                         </div> 
 
-                        <div className="cashier-salereturns-table-dateF ml-5">
-                          <span className="capitalize"> {item.address} </span>
-                        </div> 
-                        
-                        
 
                         <div className="cashier-salereturns-table-actionF">
                           <div className="dropdown">
