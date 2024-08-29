@@ -14,9 +14,7 @@ import apiUrl from "@/utils/api";
 
 export interface DataType {
   id: string;
-  name_uz: string;
-  name_en: string;
-  name_ru: string;
+  name: string;
 }
 
 const BlogList = () => {
@@ -42,7 +40,7 @@ const BlogList = () => {
         if (res.data.success) {
           const remainingBlogs = blogs.filter((item) => item.id !== id);
           setBlogs(remainingBlogs);
-          toast.success(`Hudud o'chirildi`, {
+          toast.success(`Katalog o'chirildi`, {
             position: "top-left",
           });
         }
@@ -147,7 +145,7 @@ const BlogList = () => {
                         key={item.id}
                         className="cashier-salereturns-table-list flex border-b border-solid border-grayBorder h-12">
                         <div className="cashier-salereturns-table-dateF ml-5">
-                          <span className="capitalize"> {item.name_ru} </span>
+                          <span className="capitalize"> {item.name} </span>
                         </div>
 
                         <div className="cashier-salereturns-table-actionF">

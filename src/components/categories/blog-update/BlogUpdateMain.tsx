@@ -3,38 +3,31 @@ import { idType } from "@/interFace/interFace";
 import React, { useEffect, useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import axios from "axios";
-import { blogDataType } from "@/interFace/apiInterFace";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import UpdateImg from "./UpdateImg";
 import { toast } from "react-toastify";
-import useGlobalContext from "@/hooks/use-context";
 import apiUrl from "@/utils/api";
 interface FormData {
-  id:string
-  name_uz: string;
-  name_en: string;
-  name_ru: string;
+  id: string;
+  name: string;
+  description: string;
+  image: [];
 }
 const BlogUpdateMain = ({ id }: idType) => {
-  const {user,header} = useGlobalContext()
   const [myproduct, setProduct] = useState<FormData>();
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [changeImage, setchangeImage] = useState(false);
-  const openModal = () => setModalIsOpen(true);
-  const closeModal = () => setModalIsOpen(false);
-  const router = useRouter(); 
- 
+  const router = useRouter();
 
   useEffect(() => {
     axios
       .get(`${apiUrl}/categories/${id}`)
-      .then((res) => { 
+      .then((res) => {
         setProduct(res.data.data);
       })
       .catch((e) => console.log(e));
   }, [id, changeImage]);
- 
 
   const {
     register,
@@ -42,23 +35,26 @@ const BlogUpdateMain = ({ id }: idType) => {
     formState: { errors },
   } = useForm<FormData>();
 
-
   const onSubmit: SubmitHandler<FormData> = (data) => {
     // setLoading(true);
     const formData = new FormData();
 
-      // Append text fields to formData
-      formData.append('name_uz', data.name_uz); 
-      formData.append('name_en', data.name_en); 
-      formData.append('name_ru', data.name_ru); 
+    if (data.image && data.image.length) {
+      for (let i = 0; i < data.image.length; i++) {
+        formData.append("image", data.image[i]);
+      }
+    }
 
-    
+    // Append text fields to formData
+    formData.append("name", data.name);
+    formData.append("description", "hello");
+
     axios
-      .put(`${apiUrl}/categories/${id}`, formData,{
-        headers:{
-          "Authorization": `Bearer ${localStorage.getItem('accessToken')}`,
-          "Content-Type":"multipart/form-data", 
-        }
+      .put(`${apiUrl}/categories/${id}`, formData, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+          "Content-Type": "multipart/form-data",
+        },
       })
       .then((res) => {
         if (res.data.message === "Category was updated successfully") {
@@ -77,78 +73,56 @@ const BlogUpdateMain = ({ id }: idType) => {
       });
   };
 
-
-
   return (
     <>
       {myproduct && (
         <form
           onSubmit={handleSubmit(onSubmit)}
-          className="cashier-content-area ml-[300px] mt-[30px] px-7"
-        >
+          className="cashier-content-area ml-[300px] mt-[30px] px-7">
           <div className="cashier-addsupplier-area bg-white p-7 custom-shadow rounded-lg pt-5 mb-5">
             <h4 className="text-[20px] font-bold text-heading mb-9">
-            Hududni o`zgartirish 
+              Katalogni o`zgartirish
             </h4>
-            <div className="grid grid-cols-12 gap-x-5"> 
-            <div className="lg:col-span-4 md:col-span-6 col-span-12">
-              <div className="cashier-select-field mb-5">
-                <h5 className="text-[15px] text-heading font-semibold mb-3">
-                  Hudud nomi - Uz
-                </h5>
-                <div className="cashier-input-field-style">
-                  <div className="single-input-field w-full">
-                    <input
-                      type="text"
-                      defaultValue={myproduct.name_uz}
-
-                      placeholder="O'zbek"
-                      {...register("name_uz",  )}
-                    />
-                    {errors.name_uz && <span>{errors.name_uz.message}</span>}
+            <div className="grid grid-cols-12 gap-x-5">
+              <div className="lg:col-span-4 md:col-span-6 col-span-12">
+                <div className="cashier-select-field mb-5">
+                  <h5 className="text-[15px] text-heading font-semibold mb-3">
+                    Katalog nomi
+                  </h5>
+                  <div className="cashier-input-field-style">
+                    <div className="single-input-field w-full">
+                      <input
+                        type="text"
+                        defaultValue={myproduct.name}
+                        placeholder="O'zbek"
+                        {...register("name")}
+                      />
+                      {errors.name && <span>{errors.name.message}</span>}
+                    </div>
                   </div>
                 </div>
               </div>
-            </div> 
-            <div className="lg:col-span-4 md:col-span-6 col-span-12">
-              <div className="cashier-select-field mb-5">
-                <h5 className="text-[15px] text-heading font-semibold mb-3">
-                Hudud nomi - En
-                </h5>
-                <div className="cashier-input-field-style">
-                  <div className="single-input-field w-full">
-                    <input
-                      type="text"
-                      defaultValue={myproduct.name_en}
 
-                      placeholder="Inglizcha nomi"
-                      {...register("name_en",  )}
-                    />
-                    {errors.name_en && <span>{errors.name_en.message}</span>}
+              <div className="lg:col-span-4 md:col-span-6 col-span-12">
+                <div className="cashier-select-field mb-5">
+                  <h5 className="text-[15px] text-heading font-semibold mb-3">
+                    {" "}
+                    Rasm yuklash
+                  </h5>
+                  <div className="cashier-input-field-style">
+                    <div className="single-input-field w-full">
+                      <input
+                        type="file"
+                        placeholder="Add Product Rating"
+                        {...register("image")}
+                        style={{ padding: 0 }}
+                        multiple
+                        required
+                      />
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-            <div className="lg:col-span-4 md:col-span-6 col-span-12">
-              <div className="cashier-select-field mb-5">
-                <h5 className="text-[15px] text-heading font-semibold mb-3">
-                Hudud nomi - Ru
-                </h5>
-                <div className="cashier-input-field-style">
-                  <div className="single-input-field w-full">
-                    <input
-                      type="text"
-                      defaultValue={myproduct.name_ru}
-
-                      placeholder="Rus"
-                      {...register("name_ru",  )}
-                    />
-                    {errors.name_ru && <span>{errors.name_ru.message}</span>}
-                  </div>
-                </div>
-              </div>
-            </div>
-           
 
               <div className="col-span-12">
                 <div className="cashier-managesale-top-btn default-light-theme pt-2.5">
@@ -161,8 +135,6 @@ const BlogUpdateMain = ({ id }: idType) => {
           </div>
         </form>
       )}
-
-      
     </>
   );
 };

@@ -30,7 +30,7 @@ const AppProvider = ({ children }: { children: React.ReactNode }) => {
   useEffect(() => {
     if (token || loggedIn) {
       axios
-        .get(`${'https://v1.centurysilkroadtravel.uz/api'}/auth/me`, header)
+        .get(`${'https://picnic.propartnyor.uz/api'}/auth/me`, header)
         .then((res) => {
           if (res.data.data) {
             const userinfo = res.data.data;

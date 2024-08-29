@@ -1,5 +1,4 @@
 "use client";
-import { ProductType } from "@/interFace/apiInterFace";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import updateIcon from "../../../public/assets/img/icon/action-2.png";
@@ -15,7 +14,7 @@ import apiUrl from "@/utils/api";
 
 const ProductsList = () => {
   const { header, user } = useGlobalContext();
-  const [products, setProducts] = useState<ProductType[]>([]);
+  const [products, setProducts] = useState<any[]>([]);
   const [searchValue, setSearchValue] = useState("");
   const [open, setOpen] = useState<boolean>(false);
   const [match, setMatch] = useState<string>("");
@@ -35,10 +34,7 @@ const ProductsList = () => {
   const handleDeleteProduct = (id: string) => {
     if (user?.phone_number) {
       axios
-        .delete(
-          `${apiUrl}/products/${id}`,
-          header
-        )
+        .delete(`${apiUrl}/products/${id}`, header)
         .then((res) => {
           if (res.data.success) {
             const remainingProduct = products.filter((item) => item.id !== id);
@@ -66,7 +62,9 @@ const ProductsList = () => {
   const handleInputChange = (e: any) => {
     setSearchValue(e.target.value);
     axios
-      .get(`${process.env.BASE_URL}/service/search-service?search=${searchValue}`)
+      .get(
+        `${process.env.BASE_URL}/service/search-service?search=${searchValue}`
+      )
       .then((res) => {
         setProducts(res.data.data);
       })
@@ -75,10 +73,8 @@ const ProductsList = () => {
 
   useEffect(() => {
     axios
-      .get(
-        `${apiUrl}/products`
-      )
-      .then((res) => { 
+      .get(`${apiUrl}/products`)
+      .then((res) => {
         setProducts(res.data.data);
         setotalPages(res.data.totalPages);
         setcurrentPage(res.data.currentPage);
@@ -135,38 +131,29 @@ const ProductsList = () => {
                 <div className="cashier-salereturns-table-innerD">
                   <div className="cashier-salereturns-table-inner-wrapperD border border-solid border-grayBorder border-b-0 mb-7">
                     <div className="cashier-salereturns-table-list flex border-b border-solid border-grayBorder h-12">
-                    
                       <div className="cashier-salereturns-table-dateF max-w-fit	 ml-5">
                         <h5>Наименование товара</h5>
-                      </div> 
-                     
-                      
+                      </div>
 
                       <div className="cashier-salereturns-table-actionF">
                         <h5>Действие</h5>
                       </div>
                     </div>
 
-                    {products.length ? ( 
+                    {products.length ? (
                       products.map((item) => (
                         <div
                           key={item.id}
-                          className="cashier-salereturns-table-list flex border-b border-solid border-grayBorder h-20"
-                        >
-                        
+                          className="cashier-salereturns-table-list flex border-b border-solid border-grayBorder h-20">
                           <div className="cashier-salereturns-table-dateF ml-5">
-                            <span> {item.title_ru} </span>
-                          </div> 
-                          {/* <div className="cashier-salereturns-table-customerF ">
-                            <span>{item.text_uz}</span>
-                          </div> */}
-                       
+                            <span> {item.title} </span>
+                          </div>
+
                           <div className="cashier-salereturns-table-actionF">
                             <div className="dropdown">
                               <button
                                 onClick={() => handleOpen(item.id)}
-                                className="common-action-menu-style"
-                              >
+                                className="common-action-menu-style">
                                 Action
                                 <i className="fa-sharp fa-solid fa-caret-down"></i>
                               </button>
@@ -174,12 +161,9 @@ const ProductsList = () => {
                                 className="dropdown-list"
                                 style={{
                                   display: `${
-                                    item.id === match && open
-                                      ? "block"
-                                      : "none"
+                                    item.id === match && open ? "block" : "none"
                                   }`,
-                                }}
-                              >
+                                }}>
                                 <button className="dropdown-menu-item">
                                   <Image
                                     src={updateIcon}
@@ -187,15 +171,13 @@ const ProductsList = () => {
                                   />
 
                                   <Link
-                                    href={`/products/products-update/${item.id}`}
-                                  >
+                                    href={`/products/products-update/${item.id}`}>
                                     Edit
                                   </Link>
-                                </button> 
+                                </button>
                                 <button
                                   onClick={() => handleDeleteProduct(item.id)}
-                                  className="dropdown-menu-item"
-                                >
+                                  className="dropdown-menu-item">
                                   <Image
                                     src={deleteIcon}
                                     alt="icon not found"

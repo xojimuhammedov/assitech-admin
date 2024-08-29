@@ -6,18 +6,14 @@ import React, { useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import axios from "axios";
 import Image from "next/image";
-import useGlobalContext from "@/hooks/use-context"; 
+import useGlobalContext from "@/hooks/use-context";
 import apiUrl from "@/utils/api";
- 
-
 
 interface FormData {
-  name_uz: string;
-  name_en: string;
-  name_ru: string;
+  name: string;
+  description: string;
+  image: [];
 }
-
- 
 
 const CreateServiceMain = () => {
   const { user, header } = useGlobalContext();
@@ -33,37 +29,33 @@ const CreateServiceMain = () => {
     formState: { errors },
   } = useForm<FormData>();
   const onSubmit: SubmitHandler<FormData> = (data) => {
-    
-
     const formData = new FormData();
 
-    
-    formData.append('name_uz', data.name_uz); 
-    formData.append('name_en', data.name_en); 
-    formData.append('name_ru', data.name_ru); 
+    if (data.image && data.image.length) {
+      for (let i = 0; i < data.image.length; i++) {
+        formData.append("image", data.image[i]);
+      }
+    }
 
-
+    formData.append("name", data.name);
+    formData.append("description", "hello");
 
     axios
-      .post(
-        `${apiUrl}/categories/`,
-        formData,
-        {
-          headers:{
-            "Authorization": `Bearer ${localStorage.getItem('accessToken')}`,
-            "Content-Type":"multipart/form-data", 
-          }
-        }
-      )
-      .then((res) => { 
+      .post(`${apiUrl}/categories/`, formData, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+          "Content-Type": "multipart/form-data",
+        },
+      })
+      .then((res) => {
         switch (res.data.message) {
           case "Category was created succesfully!":
-            toast.success(`Hudud yaratildi!🎉`, {
+            toast.success(`Katalog yaratildi!🎉`, {
               position: "top-left",
             });
             reset();
             setupload(false);
-            break; 
+            break;
           case "custom error":
             reset();
             setupload(false);
@@ -77,7 +69,7 @@ const CreateServiceMain = () => {
         }
       })
       .catch((error) => {
-        if (error.response.status === 403  || error.response.status === 403) {
+        if (error.response.status === 403 || error.response.status === 403) {
           toast.error(`Qaytadan login qiling!`, {
             position: "top-left",
           });
@@ -88,92 +80,62 @@ const CreateServiceMain = () => {
       });
   };
 
- 
-
   return (
     <>
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className="cashier-content-area mt-[30px] ml-[300px] px-7"
-      >
+        className="cashier-content-area mt-[30px] ml-[300px] px-7">
         <div className="cashier-addsupplier-area bg-white p-7 custom-shadow rounded-lg pt-5 mb-5">
           <h4 className="text-[20px] font-bold text-heading mb-9">
-          Создать категорию
+            Katalog yaratish
           </h4>
-          <div className="grid grid-cols-12 gap-x-5"> 
-          <div className="lg:col-span-4 md:col-span-6 col-span-12">
+          <div className="grid grid-cols-12 gap-x-5">
+            <div className="lg:col-span-4 md:col-span-6 col-span-12">
               <div className="cashier-select-field mb-5">
                 <h5 className="text-[15px] text-heading font-semibold mb-3">
                   {" "}
-                  Name (Uzbek)
+                  Katalog nomi
                 </h5>
                 <div className="cashier-input-field-style">
                   <div className="single-input-field w-full">
                     <input
                       type="text"
-                      placeholder="Name (Uzbek)"
-                      {...register("name_uz", {
+                      placeholder="Katalog nomi"
+                      {...register("name", {
                         required: "Name (Uzbek) is required",
                       })}
                     />
-                    {errors.name_uz && (
-                      <span>{errors.name_uz.message}</span>
-                    )}
+                    {errors.name && <span>{errors.name.message}</span>}
                   </div>
                 </div>
               </div>
             </div>
+
             <div className="lg:col-span-4 md:col-span-6 col-span-12">
               <div className="cashier-select-field mb-5">
                 <h5 className="text-[15px] text-heading font-semibold mb-3">
                   {" "}
-                  Name (English)
+                  Rasm yuklash
                 </h5>
                 <div className="cashier-input-field-style">
                   <div className="single-input-field w-full">
                     <input
-                      type="text"
-                      placeholder="Name (English)"
-                      {...register("name_en", {
-                        required: "Name (English) is required",
-                      })}
+                      type="file"
+                      placeholder="Add Product Rating"
+                      {...register("image")}
+                      style={{ padding: 0 }}
+                      multiple
+                      required
                     />
-                    {errors.name_en && (
-                      <span>{errors.name_en.message}</span>
-                    )}
                   </div>
                 </div>
               </div>
             </div>
-
-            <div className="lg:col-span-4 md:col-span-6 col-span-12">
-  <div className="cashier-select-field mb-5">
-    <h5 className="text-[15px] text-heading font-semibold mb-3">
-      {" "}
-      Name (Russian)
-    </h5>
-    <div className="cashier-input-field-style">
-      <div className="single-input-field w-full">
-        <input
-          type="text"
-          placeholder="Name (Russian)"
-          {...register("name_ru", {
-            required: "Name (Russian) is required",
-          })}
-        />
-        {errors.name_ru && (
-          <span>{errors.name_ru.message}</span>
-        )}
-      </div>
-    </div>
-  </div>
-</div>
-
 
             <div className="col-span-12">
               <div className="cashier-managesale-top-btn default-light-theme pt-2.5">
                 <button className="btn-primary" type="submit">
-                Создавать
+                  Yaratish
                 </button>
               </div>
             </div>
